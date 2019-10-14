@@ -1,4 +1,6 @@
-const AgendaData = [
+import { IAgendaDataItem } from './IAgendaDataItem';
+
+const AgendaData: IAgendaDataItem[] = [
     {
         "title": "Keynote: The Care and Feeding of Software Engineers",
         "speaker": "Heather Downing",
