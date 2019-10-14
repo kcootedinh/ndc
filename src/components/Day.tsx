@@ -14,7 +14,7 @@ const Day: React.FC<IDayProps> = ({ day, agenda }) => {
     <div className={`Day ${day}`}>
       <h2>{day}</h2>
       {Object.keys(timeslots).map(key => (
-        <TimeSlot key={key} timeslot={key} talks={timeslots[key]} />
+        <TimeSlot key={key} timeSlot={key} talks={timeslots[key]} />
       ))}
     </div>
   );

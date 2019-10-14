@@ -4,12 +4,12 @@ import Talk from "./Talk";
 
 interface ITimeSlotProps {
   talks: IAgendaItem[];
-  timeslot: string;
+  timeSlot: string;
 }
 
-const TimeSlot: React.FC<ITimeSlotProps> = ({ talks, timeslot }) => (
+const TimeSlot: React.FC<ITimeSlotProps> = ({ talks, timeSlot }) => (
   <div className="Timeslot">
-    <h4>{timeslot}</h4>
+    <h4>{timeSlot}</h4>
     {talks.map(item => (
       <Talk
         key={`${item.speaker}${item.title}`}
