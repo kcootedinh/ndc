@@ -1,27 +1,37 @@
-import moment from 'moment';
-import { IAgendaItem } from './IAgendaItem';
+import moment from "moment";
 
-const mapAgenda = (agenda: IAgendaItem[]) => {
-    return agenda.reduce((groups: { [key: string]: IAgendaItem[] }, item) => {
-        if (!groups[item.day]) {
-            groups[item.day] = [];
-        }
-        groups[item.day].push(item);
-        return groups;
-    }, {});
+export interface IAgendaItem {
+  day: string;
+  startTime: Date;
+  endTime: Date;
+  room: string;
+  title: string;
+  speaker: string;
+}
+
+const groupAgendaDays = (agenda: IAgendaItem[]) => {
+  return agenda.reduce((groups: { [key: string]: IAgendaItem[] }, item) => {
+    if (!groups[item.day]) {
+      groups[item.day] = [];
+    }
+    groups[item.day].push(item);
+    return groups;
+  }, {});
 };
 
-const groupTimeSlots = (agenda: IAgendaItem[]) => {
-    return agenda.reduce((groups: { [key: string]: IAgendaItem[] }, item) => {
-        if (!groups[formatTimeSlot(item)]) {
-            groups[formatTimeSlot(item)] = [];
-        }
-        groups[formatTimeSlot(item)].push(item);
-        return groups;
-    }, {});
+const formatTime = (time: Date) => moment(time).format("hh:mm");
+
+const groupAgendaTimeslots = (agenda: IAgendaItem[]) => {
+  return agenda.reduce((groups: { [key: string]: IAgendaItem[] }, item) => {
+    const timeslot = `${formatTime(item.startTime)} - ${formatTime(
+      item.endTime
+    )}`;
+    if (!groups[timeslot]) {
+      groups[timeslot] = [];
+    }
+    groups[timeslot].push(item);
+    return groups;
+  }, {});
 };
 
-const formatTimeSlot = (item: IAgendaItem) =>
-    `${moment(item.startTime).format('hh:mm')} - ${moment(item.endTime).format('hh:mm')}`;
-
-export { mapAgenda, groupTimeSlots, formatTimeSlot };
+export { groupAgendaDays, groupAgendaTimeslots, formatTime };
