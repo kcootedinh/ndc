@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import AgendaData from './AgendaData';
+import AgendaItem from './AgendaItem';
 import './App.css';
 
 const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    function formatTime({ hour, minutes }: { hour: number, minutes: number }) {
+        return `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+    }
+
+    function toTitleCase(text: string) {
+        return text[0].toUpperCase() + text.slice(1);
+    }
+
+    return <div className="App">
+        {AgendaData.map((item) =>
+            <AgendaItem
+                title={item.title}
+                speaker={item.speaker}
+                startTime={formatTime(item.startTime)}
+                endTime={formatTime(item.endTime)}
+                day={toTitleCase(item.day)}
+            />)}
+    </div>;
+};
 
 export default App;
