@@ -10,7 +10,7 @@ const App: React.FC = () => {
         NDC Sydney Agenda
       </header>
       {agenda.map(item => {
-        return (<div>
+        return (<div key={`${item.title}-${item.speaker}`}>
           <h2>{item.day}</h2>
           <h3>{moment(item.startTime).format('hh:mm')} - {moment(item.endTime).format('hh:mm')}</h3>
           <p>{item.title} - {item.speaker}</p>
