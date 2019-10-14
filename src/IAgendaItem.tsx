@@ -1,4 +1,4 @@
-export interface IAgendaDataItem {
+export interface IAgendaItem {
     title: string
     speaker: string
     startTime: { hour: number, minutes: number }
